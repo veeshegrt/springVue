@@ -1,34 +1,27 @@
 package com.czw.springboot.controller;
 
 import cn.hutool.core.io.IoUtil;
-import cn.hutool.core.io.resource.MultiFileResource;
 import cn.hutool.core.util.StrUtil;
 import cn.hutool.poi.excel.ExcelReader;
 import cn.hutool.poi.excel.ExcelUtil;
 import cn.hutool.poi.excel.ExcelWriter;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
-import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.czw.springboot.common.Constants;
 import com.czw.springboot.common.Result;
 import com.czw.springboot.controller.dto.userDto;
 import com.czw.springboot.entity.sysUser;
-import com.czw.springboot.mapper.sysUserMapper;
 import com.czw.springboot.service.sysUserService;
 import com.czw.springboot.utils.JwtUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpRequest;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
-
 import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.Objects;
 
 @RestController
@@ -96,8 +89,6 @@ public class sysUserController {
         QueryWrapper<sysUser> queryWrapper = new QueryWrapper<>();
         queryWrapper.lambda().like(Objects.nonNull(username), sysUser::getUsername, username).orderByDesc(sysUser::getId);
         IPage<sysUser> pages = sysUserService.page(page,queryWrapper);
-        sysUser currentUser = JwtUtils.getCurrentUser();
-        System.out.println("==============>"+currentUser);
         return pages;
     }
 

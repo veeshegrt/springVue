@@ -41,7 +41,7 @@ export default {
   },
   created() {
     const user = JSON.parse(localStorage.getItem("user"))
-    this.request.post("/find/"+user.username).then(res=>{
+    this.request.post("/sysUser/find/"+user.username).then(res=>{
       this.form = res.data;
     })
   }

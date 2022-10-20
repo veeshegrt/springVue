@@ -20,7 +20,14 @@
         <template slot="title"><i class="el-icon-menu"></i>
           <span>系统管理</span></template>
         <el-menu-item-group>
-          <el-menu-item index="/user">用户管理</el-menu-item>
+          <el-menu-item index="/user">
+            <i class="el-icon-user"></i>
+            用户管理
+          </el-menu-item>
+          <el-menu-item index="/files">
+            <i class="el-icon-files"></i>
+            文件管理
+          </el-menu-item>
         </el-menu-item-group>
       </el-submenu>
     </el-menu>

@@ -7,6 +7,7 @@ import store from "../store";
 import Login from "../views/Login";
 import Register from "../views/Register";
 import Person from "../views/Person";
+import Files from "../views/Files";
 
 Vue.use(Router)
 
@@ -30,6 +31,11 @@ const routes=[
           path:'person',
           name:'个人信息',
           component: Person,
+        },
+        {
+          path:'files',
+          name:'文件管理',
+          component: Files,
         }
       ]
     },

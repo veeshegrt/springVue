@@ -14,7 +14,8 @@ public class WebConfig implements WebMvcConfigurer {
         registry.addInterceptor(tokenInterceptor())
                 .addPathPatterns("/**")
                 .excludePathPatterns("/sysUser/login", "/sysUser/register")
-                .excludePathPatterns("/sysUser/import","/sysUser/export");
+                .excludePathPatterns("/sysUser/import","/sysUser/export")
+                .excludePathPatterns("/file/*");
     }
 
     @Bean

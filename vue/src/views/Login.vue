@@ -41,7 +41,7 @@ export default {
     login(){
       this.$refs['ruleForm'].validate((valid) => {
         if (valid) {
-          this.request.post("/login",this.user).then(res=>{
+          this.request.post("/sysUser/login",this.user).then(res=>{
             localStorage.setItem("user",JSON.stringify(res.data))
             if(res.code!=200){
               this.$message.error(res.msg)

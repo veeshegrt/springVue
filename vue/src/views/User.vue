@@ -110,7 +110,7 @@ export default {
   },
   methods:{
     load(){
-      request.get("/getData",{params:{
+      request.get("/sysUser/getData",{params:{
           pageNum:this.pageNum,
           pageSize:this.pageSize,
           username:this.username
@@ -124,7 +124,7 @@ export default {
       this.dialogFormVisible = true
     },
     save(){
-      request.post("/save",this.form).then(res=>{
+      request.post("/sysUser/save",this.form).then(res=>{
         if(res){
           this.dialogFormVisible = false
           this.$message.success("保存成功")
@@ -136,14 +136,14 @@ export default {
       })
     },
     del(id){
-      request.post("/delete/"+id).then(res=>{
+      request.post("/sysUser/delete/"+id).then(res=>{
           this.load()
         }
       )
     },
     batchDel(){
       let ids = this.multipleSelection.map(v=>v.id)
-      request.post("/batchDel",ids).then(res=>{
+      request.post("/sysUser/batchDel",ids).then(res=>{
         if(res){
           this.$message.success("删除成功")
         }else {

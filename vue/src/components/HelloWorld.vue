@@ -69,7 +69,7 @@ export default {
       }
     },
     logout(){
-      this.$router.push("/login").then(res=>{
+      this.$router.push("/sysUser/login").then(res=>{
         localStorage.removeItem("user")
         this.$message.success("退出成功")
       })

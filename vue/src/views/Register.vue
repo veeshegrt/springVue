@@ -47,7 +47,7 @@ export default {
     register(){
       this.$refs['ruleForm'].validate((valid) => {
         if(this.user.password === this.user.confirmPassword){
-          this.request.post("/register",this.user).then(res=>{
+          this.request.post("/sysUser/register",this.user).then(res=>{
             if(res.code === '200'){
               this.$message.success("注册成功")
             }else {
