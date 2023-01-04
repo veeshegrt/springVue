@@ -7,6 +7,8 @@ import com.baomidou.mybatisplus.annotation.TableName;
 import io.swagger.annotations.ApiOperation;
 import lombok.Data;
 
+import java.util.Date;
+
 @Data
 @TableName("sys_user")
 public class sysUser {
@@ -18,5 +20,6 @@ public class sysUser {
     private String email;
     private String phone;
     private String address;
+    private Date createTime;
     private String avatarUrl;
 }

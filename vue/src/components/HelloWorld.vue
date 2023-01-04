@@ -6,10 +6,15 @@
         <el-header style="font-size: 12px;border-bottom: 1px solid #cccc;line-height: 60px;display: flex">
           <div style="flex: 1;font-size: 20px;">
             <span :class=icon style="cursor: pointer" @click="collapseAside">
-          </span>
+            </span>
+          </div>
+          <div style="flex: 1;font-size: 20px;">
+            <img v-if="imageUrl" :src="imageUrl" class="avatar">
           </div>
           <el-dropdown style="width: 100px;">
-            <span>{{user.username}}</span> <i class="el-icon-arrow-down"></i>
+            <el-col style="height: 50px;margin-left: 5px">
+              <span>{{user.username}}</span> <i class="el-icon-arrow-down"></i>
+            </el-col>
             <el-dropdown-menu slot="dropdown">
               <el-dropdown-item>
                 <span style="text-decoration: none" @click="logout">退出</span>
@@ -53,7 +58,8 @@ export default {
       sideWidth: 200,
       dialogFormVisible:false,
       icon:'el-icon-s-unfold',
-      user:{}
+      user:{},
+      imageUrl:"http://localhost:9090/file/34c023d340534488aef3c27b5ec2aa2f.jfif"
     }
   },
 
@@ -69,7 +75,7 @@ export default {
       }
     },
     logout(){
-      this.$router.push("/sysUser/login").then(res=>{
+      this.$router.push("/login").then(res=>{
         localStorage.removeItem("user")
         this.$message.success("退出成功")
       })
@@ -86,5 +92,13 @@ export default {
 .el-menu-vertical-demo:not(.el-menu--collapse) {
   width: 200px;
   min-height: 400px;
+}
+.avatar {
+  margin-top: 5px;
+  width: 48px;
+  height: 48px;
+  display: block;
+  border-radius: 50%;
+  margin-left: 1300px;
 }
 </style>

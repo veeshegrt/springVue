@@ -99,14 +99,14 @@ export default {
       })
     },
     del(id){
-      request.post("/sysUser/delete/"+id).then(res=>{
+      request.post("/file/delete/"+id).then(res=>{
           this.load()
         }
       )
     },
     batchDel(){
       let ids = this.multipleSelection.map(v=>v.id)
-      request.post("/sysUser/batchDel",ids).then(res=>{
+      request.post("/file/batchDel",ids).then(res=>{
         if(res){
           this.$message.success("删除成功")
         }else {

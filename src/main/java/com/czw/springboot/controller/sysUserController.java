@@ -1,5 +1,9 @@
 package com.czw.springboot.controller;
 
+import cn.hutool.core.collection.CollUtil;
+import cn.hutool.core.date.DateUnit;
+import cn.hutool.core.date.DateUtil;
+import cn.hutool.core.date.Quarter;
 import cn.hutool.core.io.IoUtil;
 import cn.hutool.core.util.StrUtil;
 import cn.hutool.poi.excel.ExcelReader;
@@ -21,8 +25,7 @@ import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 
 @RestController
 @CrossOrigin
@@ -106,7 +109,7 @@ public class sysUserController {
         return true;
     }
     // 导入
-    @PostMapping("import")
+    @PostMapping("/import")
     public Boolean imp(MultipartFile file) throws IOException {
         InputStream inputStream = file.getInputStream();
         ExcelReader reader = ExcelUtil.getReader(inputStream);
@@ -115,5 +118,43 @@ public class sysUserController {
         return save;
     }
 
+    @GetMapping("/echartsData")
+    public Result echartsData(){
+         int q1 = 0;
+         int q2 = 0;
+         int q3 = 0;
+         int q4 = 0;
+        List<sysUser> list = sysUserService.list();
+        for(sysUser user : list){
+            Date createTime = user.getCreateTime();
+            Quarter quarter = DateUtil.quarterEnum(createTime);
+            switch (quarter){
+                case Q1: q1 += 1;break;
+                case Q2: q2 += 1;break;
+                case Q3: q3 += 1;break;
+                case Q4: q4 += 1;break;
+                default:break;
+            }
+        }
+        ArrayList<Object> echartsList = new ArrayList<>();
+        ArrayList<Object> dataList = new ArrayList<>();
+        ArrayList<Object> piMapList = new ArrayList<>();
+        ArrayList<String> piList = CollUtil.newArrayList("第一季度", "第二季度", "第三季度", "第四季度");
+        echartsList.add(q1);
+        echartsList.add(q2);
+        echartsList.add(q3);
+        echartsList.add(q4);
+
+        for(int i = 0;i<echartsList.size();i++){
+            HashMap<Object, Object> piMap = new HashMap<>();
+            piMap.put("name",piList.get(i));
+            piMap.put("value",echartsList.get(i));
+            piMapList.add(piMap);
+        }
+
+        dataList.add(piMapList.toArray());
+        dataList.add(echartsList.toArray());
+        return Result.success(dataList);
+    }
 
 }

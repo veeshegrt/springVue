@@ -93,6 +93,16 @@ public class fileController {
         return Result.success(filePage);
     }
 
+    // 删除
+    @PostMapping("/delete/{id}")
+    public Result deleteById(@PathVariable Integer id){
+        return Result.success(fileService.removeById(id));
+    }
 
+    // 批量删除
+    @PostMapping("/batchDel")
+    public Result batchDelById(@RequestBody List<Integer> ids){
+        return Result.success(fileService.removeBatchByIds(ids));
+    }
 
 }
