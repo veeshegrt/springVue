@@ -28,6 +28,10 @@
             <i class="el-icon-files"></i>
             文件管理
           </el-menu-item>
+          <el-menu-item index="/role">
+            <i class="el-icon-user-solid"></i>
+            角色管理
+          </el-menu-item>
         </el-menu-item-group>
       </el-submenu>
     </el-menu>
